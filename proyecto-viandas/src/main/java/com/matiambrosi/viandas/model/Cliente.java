@@ -1,11 +1,12 @@
 
 package com.matiambrosi.viandas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,8 @@ public class Cliente {
     public String nombre;
     public String apellido;
     private String celular;
-    @ManyToOne
+    @OneToMany (mappedBy = "unCliente")
+    @JsonIgnore
     public List<Pedido> pedidos;
 
     public Cliente() {
