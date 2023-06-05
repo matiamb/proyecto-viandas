@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,18 +32,18 @@ public class ComidaController {
     }
     
     @GetMapping ("/comidas/{id}")
-    public Comida traerUnaComida(@RequestParam Long id){
+    public Comida traerUnaComida(@PathVariable Long id){
         return comidasvs.traerUnaComida(id);
     }
     
     @DeleteMapping ("/comidas/borrar/{id}")
-    public String borrarComida(@RequestParam Long id){
+    public String borrarComida(@PathVariable Long id){
         comidasvs.borrarComida(id);
         return "Comida borrada con exito";
     }
     
     @PutMapping ("/comidas/editar/{id}")
-    public Comida editarComida(@RequestParam Long id,
+    public Comida editarComida(@PathVariable Long id,
             @RequestParam (required = false, name = "id") Long nuevaid,
             @RequestParam (required = false, name = "nombreComida") String nuevoNombre,
             @RequestParam (required = false, name = "precio") double nuevoprecio){
