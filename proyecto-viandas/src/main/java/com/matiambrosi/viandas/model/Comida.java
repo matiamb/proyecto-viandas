@@ -1,6 +1,8 @@
 
 package com.matiambrosi.viandas.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,7 +21,9 @@ public class Comida {
     private long id;
     public String nombreComida;
     public double precio;
-    @ManyToMany
+    @ManyToMany (mappedBy = "comidas") //el mappedby va del lado que no es el dominante
+    @JsonIgnoreProperties ("comidas")
+    @JsonIgnore
     public List<Pedido> listaPedidos;
 
     public Comida() {
