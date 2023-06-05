@@ -5,8 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,9 +20,13 @@ public class Pedido {
     @Id
     @GeneratedValue (strategy = GenerationType.SEQUENCE)
     private Long id;
-    @OneToMany
+    @ManyToOne
     public Cliente unCliente;
-    @ManyToMany
+    @ManyToMany//las propiedades van del lado dominante
+    @JoinTable ( //esta es la tabla intermedia, por mas que la crea automaticamente, a veces al parecer no lo hace bien
+            name = "Pedido_comidas",//nombre de la tabla
+            joinColumns = @JoinColumn (name = "id_pedido"),//nombre de las columnas
+            inverseJoinColumns = @JoinColumn (name = "id_comida"))
     public List<Comida> comidas;
 
     public Pedido() {
